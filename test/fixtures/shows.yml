@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  venue: MyString
+  date: 2019-08-24
+  setlist: MyString
+
+two:
+  venue: MyString
+  date: 2019-08-24
+  setlist: MyString
