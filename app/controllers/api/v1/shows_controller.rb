@@ -20,10 +20,6 @@ module Api::V1
             render json: show
         end
 
-        # def new
-        #     @show = Show.new
-        # end
-         
         def edit
             show = Show.find(params[:id])
             render json: show
@@ -55,25 +51,18 @@ module Api::V1
         end
 
         def venues
-            venues = Show.pluck(:venue)
+            venues = Show.pluck(:venue).sort
             render json: venues
+        end
+
+        def get_videos
+            videos = Show.find(params[:id]).videos
+            render json: videos
         end
         
         private            
             def show_params
                 params.require(:show).permit(:date, :venue, :first_set, :second_set, :encore)
             end
-
-            # def year_params
-            #     params.permit(:year_filter)
-            # end
-
-            # def venue_params
-            #     params.permit(:venue_filter)
-            # end
-
-            # def order_params
-            #     params.permit(:sort_order)
-            # end
     end
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post "filtered_shows", to: "shows#filtered_shows"
       get "venues", to: "shows#venues"
       get "years", to: "shows#years"
+      get "get_videos/:id", to: "shows#get_videos"
 
       resources :videos
     end
