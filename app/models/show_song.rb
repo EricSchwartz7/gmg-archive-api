@@ -1,0 +1,2 @@
+class ShowSong < ApplicationRecord
+end

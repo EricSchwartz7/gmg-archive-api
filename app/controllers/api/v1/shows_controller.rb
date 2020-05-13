@@ -1,5 +1,3 @@
-require 'byebug'
-
 module Api::V1
     class ShowsController < ApplicationController
 
