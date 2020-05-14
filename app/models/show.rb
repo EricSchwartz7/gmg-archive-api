@@ -2,6 +2,8 @@ class Show < ApplicationRecord
     has_many :videos
     has_many :photos
     has_many :audio_recs
+    has_many :show_songs
+    has_many :songs, through: :show_songs
 
     def self.sql_year_string(year)
         "date >= '#{year}-01-01' AND date <= '#{year}-12-31'"
