@@ -15,7 +15,12 @@ module Api::V1
     
         def show
             show = Show.find(params[:id])
-            render json: show
+            show_with_setlist = {
+                date: show.date,
+                venue: show.venue,
+                first_set_array: show.get_first_set
+            }
+            render json: show_with_setlist
         end
 
         def edit

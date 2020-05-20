@@ -25,4 +25,12 @@ class Show < ApplicationRecord
         self.all_songs.map { |song| counts[song] += 1 }
         counts.sort_by { |song, count| count }.reverse
     end
+
+    def get_first_set
+        return songs.joins(:show_songs).where(show_songs: {set: 1})
+    end
+
+    def get_second_set
+        return songs.joins(:show_songs).where(show_songs: {set: 2})
+    end
 end
