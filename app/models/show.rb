@@ -26,11 +26,18 @@ class Show < ApplicationRecord
         counts.sort_by { |song, count| count }.reverse
     end
 
-    def get_first_set
-        return songs.joins(:show_songs).where(show_songs: {set: 1})
+    def get_single_set(set_number)
+        return songs.merge(ShowSong.where(set: set_number))
     end
 
-    def get_second_set
-        return songs.joins(:show_songs).where(show_songs: {set: 2})
+    def create_first_set(first_set_ids)
+        first_set_ids.each_with_index{ |id, index| 
+            ShowSong.create!({
+                show_id: self.id,
+                song_id: id,
+                set: 1,
+                position: index
+            })
+        }
     end
 end

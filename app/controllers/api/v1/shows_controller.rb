@@ -18,7 +18,7 @@ module Api::V1
             show_with_setlist = {
                 date: show.date,
                 venue: show.venue,
-                first_set_array: show.get_first_set
+                first_set_array: show.get_single_set(1)
             }
             render json: show_with_setlist
         end
@@ -30,6 +30,7 @@ module Api::V1
         
         def create
             show = Show.create!(show_params)
+            show.create_first_set(params[:first_set_array])
             render json: show
         end
         
