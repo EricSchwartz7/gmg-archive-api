@@ -9,12 +9,12 @@ class Show < ApplicationRecord
         "date >= '#{year}-01-01' AND date <= '#{year}-12-31'"
     end
 
-    def self.all_songs
-        first_set_songs = self.pluck(:first_set).join("\n").split(/[\n,]/)
-        second_set_songs = self.pluck(:second_set).reject { |set| set.empty? }.join("\n").split(/[\n,]/)
-        encore_songs = self.pluck(:encore).reject { |set| set.empty? }.join("\n").split(/[\n,]/)
-        first_set_songs.concat(second_set_songs).concat(encore_songs)
-    end
+    # def self.all_songs
+    #     first_set_songs = self.pluck(:first_set).join("\n").split(/[\n,]/)
+    #     second_set_songs = self.pluck(:second_set).reject { |set| set.empty? }.join("\n").split(/[\n,]/)
+    #     encore_songs = self.pluck(:encore).reject { |set| set.empty? }.join("\n").split(/[\n,]/)
+    #     first_set_songs.concat(second_set_songs).concat(encore_songs)
+    # end
 
     def self.times_played(selected_song)
         self.all_songs.select { |song| song === selected_song }.count

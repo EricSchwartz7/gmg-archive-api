@@ -10,7 +10,15 @@ module Api::V1
             order_params = {date: params[:sort_order] == "most_recent" ? :desc : :asc}
 
             shows = Show.where(year_params).where(venue_params).order(order_params)
-            render json: shows
+            shows_with_setlists = shows.map do |show| 
+                {
+                    venue: show.venue,
+                    date: show.date,
+                    first_set: show.get_single_set(1),
+                    id: show.id
+                }
+            end
+            render json: shows_with_setlists
         end
     
         def show
@@ -18,7 +26,7 @@ module Api::V1
             show_with_setlist = {
                 date: show.date,
                 venue: show.venue,
-                first_set_array: show.get_single_set(1)
+                first_set: show.get_single_set(1)
             }
             render json: show_with_setlist
         end
@@ -30,7 +38,7 @@ module Api::V1
         
         def create
             show = Show.create!(show_params)
-            show.create_first_set(params[:first_set_array])
+            show.create_first_set(params[:first_set])
             render json: show
         end
         
@@ -66,7 +74,7 @@ module Api::V1
         
         private            
             def show_params
-                params.require(:show).permit(:date, :venue, :first_set, :second_set, :encore)
+                params.require(:show).permit(:date, :venue)
             end
     end
 end
