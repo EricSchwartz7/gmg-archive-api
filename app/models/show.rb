@@ -27,17 +27,23 @@ class Show < ApplicationRecord
     end
 
     def get_single_set(set_number)
-        return songs.merge(ShowSong.where(set: set_number))
+        return songs.merge(ShowSong.where(set: set_number).order(:position))
     end
 
-    def create_first_set(first_set_ids)
-        first_set_ids.each_with_index{ |id, index| 
+    def create_first_set(first_set)
+        first_set.each_with_index{ |song, index| 
             ShowSong.create!({
                 show_id: self.id,
-                song_id: id,
+                song_id: song[:id],
                 set: 1,
                 position: index
             })
         }
+    end
+
+    def update_first_set(first_set)
+        # Delete all ShowSongs related to the current show
+        ShowSong.where(show_id: self.id).delete_all
+        create_first_set(first_set)
     end
 end

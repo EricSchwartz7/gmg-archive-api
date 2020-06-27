@@ -44,10 +44,10 @@ module Api::V1
         
         def update
             show = Show.find(params[:id])
-            
-            if show.update(show_params)
-                render json: show
-            end
+            show.update_first_set(params[:first_set])
+            render json: show
+            # if show.update(show_params)
+            # end
         end
         
         def destroy
@@ -74,7 +74,7 @@ module Api::V1
         
         private            
             def show_params
-                params.require(:show).permit(:date, :venue)
+                params.require(:show).permit(:date, :venue, :first_set)
             end
     end
 end
