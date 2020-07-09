@@ -30,8 +30,23 @@ class Show < ApplicationRecord
         return songs.merge(ShowSong.where(set: set_number).order(:position))
     end
 
+    def merge_song_properties(show_song)
+        song = Song.find(show_song.song_id)
+        return {
+            id: song.id,
+            show_song_id: show_song.id,
+            title: song.title,
+            position: show_song.position,
+            set: show_song.set
+        }
+    end
+
+    def get_setlist
+        show_songs.map { |show_song| merge_song_properties(show_song) }
+    end
+
     def create_first_set(first_set)
-        first_set.each_with_index{ |song, index| 
+        first_set.each_with_index{ |song, index|
             ShowSong.create!({
                 show_id: self.id,
                 song_id: song[:id],

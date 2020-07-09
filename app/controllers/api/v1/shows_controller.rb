@@ -14,7 +14,8 @@ module Api::V1
                 {
                     venue: show.venue,
                     date: show.date,
-                    first_set: show.get_single_set(1),
+                    # first_set: show.get_single_set(1),
+                    setlist: show.get_setlist,
                     id: show.id
                 }
             end
@@ -26,7 +27,8 @@ module Api::V1
             show_with_setlist = {
                 date: show.date,
                 venue: show.venue,
-                first_set: show.get_single_set(1)
+                first_set: show.get_single_set(1),
+                setlist: show.get_setlist
             }
             render json: show_with_setlist
         end
@@ -44,7 +46,7 @@ module Api::V1
         
         def update
             show = Show.find(params[:id])
-            show.update_first_set(params[:first_set])
+            show.update_first_set(params[:setlist])
             render json: show
             # if show.update(show_params)
             # end
@@ -71,10 +73,10 @@ module Api::V1
             videos = Show.find(params[:id]).videos
             render json: videos
         end
-        
+
         private            
             def show_params
-                params.require(:show).permit(:date, :venue, :first_set)
+                params.require(:show).permit(:date, :venue, :first_set, :songs)
             end
     end
 end
