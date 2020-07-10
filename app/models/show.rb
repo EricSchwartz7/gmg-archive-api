@@ -45,20 +45,20 @@ class Show < ApplicationRecord
         show_songs.map { |show_song| merge_song_properties(show_song) }
     end
 
-    def create_first_set(first_set)
-        first_set.each_with_index{ |song, index|
+    def create_setlist(setlist)
+        setlist.each_with_index{ |song, index|
             ShowSong.create!({
                 show_id: self.id,
                 song_id: song[:id],
-                set: 1,
+                set: song[:set],
                 position: index
             })
         }
     end
 
-    def update_first_set(first_set)
+    def update_setlist(setlist)
         # Delete all ShowSongs related to the current show
         ShowSong.where(show_id: self.id).delete_all
-        create_first_set(first_set)
+        create_setlist(setlist)
     end
 end
