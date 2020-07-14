@@ -16,15 +16,15 @@ class Show < ApplicationRecord
     #     first_set_songs.concat(second_set_songs).concat(encore_songs)
     # end
 
-    def self.times_played(selected_song)
-        self.all_songs.select { |song| song === selected_song }.count
-    end
+    # def self.times_played(selected_song)
+    #     self.all_songs.select { |song| song === selected_song }.count
+    # end
 
-    def self.song_counts
-        counts = Hash.new(0)
-        self.all_songs.map { |song| counts[song] += 1 }
-        counts.sort_by { |song, count| count }.reverse
-    end
+    # def self.song_counts
+    #     counts = Hash.new(0)
+    #     self.all_songs.map { |song| counts[song] += 1 }
+    #     counts.sort_by { |song, count| count }.reverse
+    # end
 
     def get_single_set(set_number)
         return songs.merge(ShowSong.where(set: set_number).order(:position))

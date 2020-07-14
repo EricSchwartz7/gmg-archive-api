@@ -44,10 +44,11 @@ module Api::V1
         
         def update
             show = Show.find(params[:id])
+            # show.update_date(params[:date])
+            # show.update_venue(params[:venue])
+            show.update(show_params)
             show.update_setlist(params[:setlist])
             render json: show
-            # if show.update(show_params)
-            # end
         end
         
         def destroy
