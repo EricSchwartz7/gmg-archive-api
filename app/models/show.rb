@@ -46,14 +46,24 @@ class Show < ApplicationRecord
     end
 
     def create_setlist(setlist)
-        setlist.each_with_index{ |song, index|
+        i = 0
+        set = 1
+        setlist.each do |song|
+
+            if song[:set] != set
+                i = 0
+                set = song[:set]
+            end
+
             ShowSong.create!({
                 show_id: self.id,
                 song_id: song[:id],
-                set: song[:set],
-                position: index
+                set: set,
+                position: i
             })
-        }
+
+            i += 1
+        end
     end
 
     def update_setlist(setlist)

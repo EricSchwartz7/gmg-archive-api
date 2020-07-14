@@ -169,35 +169,116 @@
 #     },
 # ])
 
-ShowSong.create([
-    {
-        show_id: 106, 
-        song_id: 9, 
-        set: 1,
-        position: 1
-    },
-    {
-        show_id: 106, 
-        song_id: 10, 
-        set: 1,
-        position: 2
-    },
-    {
-        show_id: 106, 
-        song_id: 8, 
-        set: 1,
-        position: 3
-    },
-    {
-        show_id: 106, 
-        song_id: 12, 
-        set: 1,
-        position: 4
-    },
-    {
-        show_id: 106, 
-        song_id: 11,
-        set: 1,
-        position: 5
-    }
-])
+# Song.create([
+#     {
+#         title: "Chameleon",
+#         lyrics: "[Instrumental]"
+#     },
+#     {
+#         title: "Frenkle's Song",
+#         lyrics: "These are the lyrics to Frenkle's Song"
+#     },
+#     {
+#         title: "Roses Are Free",
+#         lyrics: "These are the lyrics to Roses Are Free"
+#     },
+#     {
+#         title: "Back in the USSR",
+#         lyrics: "These are the lyrics to Back in the USSR"
+#     },
+#     {
+#         title: "Boogie Child",
+#         lyrics: "These are the lyrics to Boogie Child"
+#     },
+#     {
+#         title: "No Quarter",
+#         lyrics: "These are the lyrics to No Quarter"
+#     },
+#     {
+#         title: "Get Lucky",
+#         lyrics: "These are the lyrics to Get Lucky"
+#     },
+#     {
+#         title: "Meatstick",
+#         lyrics: "These are the lyrics to Meatstick"
+#     },
+#     {
+#         title: "Shakedown Street",
+#         lyrics: "These are the lyrics to Shakedown Street"
+#     },
+#     {
+#         title: "Moon Rainbow",
+#         lyrics: "These are the lyrics to Moon Rainbow"
+#     },
+#     {
+#         title: "Scarlet Begonias",
+#         lyrics: "These are the lyrics to Scarlet Begonias"
+#     },
+#     {
+#         title: "Fire on the Mountain",
+#         lyrics: "These are the lyrics to Fire on the Mountain"
+#     },
+#     {
+#         title: "Fat Booty",
+#         lyrics: "Fat Booty"
+#     },
+#     {
+#         title: "Pick Up the Pieces",
+#         lyrics: "These are the lyrics to Pick Up the Pieces"
+#     },
+#     {
+#         title: "Have a Cigar",
+#         lyrics: "These are the lyrics to Have a Cigar"
+#     },
+#     {
+#         title: "Thriller",
+#         lyrics: "These are the lyrics to Thriller"
+#     },
+#     {
+#         title: "I Will Survive",
+#         lyrics: "These are the lyrics to I Will Survive"
+#     },
+#     {
+#         title: "Party Rock Anthem",
+#         lyrics: "These are the lyrics to Party Rock Anthem"
+#     },
+#     {
+#         title: "Mr. Saxobeat",
+#         lyrics: "These are the lyrics to Mr. Saxobeat"
+#     }
+# ])
+
+
+
+# ShowSong.create([
+#     {
+#         show_id: 106, 
+#         song_id: 9, 
+#         set: 1,
+#         position: 1
+#     },
+#     {
+#         show_id: 106, 
+#         song_id: 10, 
+#         set: 1,
+#         position: 2
+#     },
+#     {
+#         show_id: 106, 
+#         song_id: 8, 
+#         set: 1,
+#         position: 3
+#     },
+#     {
+#         show_id: 106, 
+#         song_id: 12, 
+#         set: 1,
+#         position: 4
+#     },
+#     {
+#         show_id: 106, 
+#         song_id: 11,
+#         set: 1,
+#         position: 5
+#     }
+# ])
