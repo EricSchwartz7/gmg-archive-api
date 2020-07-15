@@ -15,6 +15,11 @@ Rails.application.routes.draw do
       # Songs
       resources :songs
       post "filtered_songs", to: "songs#filtered_songs"
+      get "all_times_played", to: "songs#all_times_played"
+      get "all_percentage_played", to: "songs#all_percentage_played"
+      get "all_set_openers/:set_number", to: "songs#all_set_openers"
+      get "all_set_closers/:set_number", to: "songs#all_set_closers"
+      get "all_encore_appearances/", to: "songs#all_encore_appearances"
     end
   end
 end

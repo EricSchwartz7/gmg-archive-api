@@ -23,5 +23,32 @@ module Api::V1
             song = Song.find(params[:id])
             render json: song
         end
+
+        def all_times_played
+            song_list = Song.map_all_songs(:times_played)
+            render json: song_list
+        end
+
+        def all_percentage_played
+            song_list = Song.map_all_songs(:percentage_played)
+            render json: song_list
+        end
+
+        def all_set_openers
+            set_number = params[:set_number].to_i
+            song_list = Song.map_all_songs(:set_opener_shows, set_number)
+            render json: song_list
+        end
+
+        def all_set_closers
+            set_number = params[:set_number].to_i
+            song_list = Song.map_all_songs(:set_closer_shows, set_number)
+            render json: song_list
+        end
+
+        def all_encore_appearances
+            song_list = Song.map_all_songs(:encore_appearances)
+            render json: song_list
+        end
     end
 end
