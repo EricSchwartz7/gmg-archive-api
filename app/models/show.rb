@@ -67,7 +67,7 @@ class Show < ApplicationRecord
     end
 
     def update_setlist(setlist)
-        # Delete all ShowSongs related to the current show
+        # Delete all ShowSongs related to the current show, then recreate setlist
         ShowSong.where(show_id: self.id).delete_all
         create_setlist(setlist)
     end

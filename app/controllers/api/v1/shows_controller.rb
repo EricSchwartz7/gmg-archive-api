@@ -53,6 +53,7 @@ module Api::V1
         
         def destroy
             show = Show.find(params[:id])
+            ShowSong.where(show_id: params[:id]).delete_all
             show.destroy
         end
 
