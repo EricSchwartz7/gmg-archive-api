@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       get "all_set_openers/:set_number", to: "songs#all_set_openers"
       get "all_set_closers/:set_number", to: "songs#all_set_closers"
       get "all_encore_appearances/", to: "songs#all_encore_appearances"
+      get "show_appearances/:id", to: "songs#show_appearances"
+
     end
   end
 end

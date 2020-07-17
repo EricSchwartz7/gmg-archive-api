@@ -50,5 +50,11 @@ module Api::V1
             song_list = Song.map_all_songs(:encore_appearances)
             render json: song_list
         end
+
+        def show_appearances
+            song = Song.find(params[:id])
+            shows = song.shows.order(date: :desc)
+            render json: shows
+        end
     end
 end
