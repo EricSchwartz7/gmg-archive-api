@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'photos/upload'
+
+  get 'photos/show'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
@@ -21,6 +25,11 @@ Rails.application.routes.draw do
       get "all_set_closers/:set_number", to: "songs#all_set_closers"
       get "all_encore_appearances/", to: "songs#all_encore_appearances"
       get "show_appearances/:id", to: "songs#show_appearances"
+
+      # Photos
+      resources :photos, only: [:create, :index, :show]
+      get "photos_from_show/:id", to: "photos#photos_from_show"
+
 
     end
   end

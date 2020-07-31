@@ -26,7 +26,8 @@ module Api::V1
             show_with_setlist = {
                 date: show.date,
                 venue: show.venue,
-                setlist: show.get_setlist
+                setlist: show.get_setlist,
+                id: show.id
             }
             render json: show_with_setlist
         end
