@@ -9,8 +9,8 @@ class Song < ApplicationRecord
         ShowSong.where(song_id: id).count
     end
 
-    def percentage_played
-        percentage = times_played / Show.count.to_f
+    def percentage_played(active_show_count)
+        percentage = times_played / active_show_count
         (percentage * 100).round(1)
     end
 
@@ -35,9 +35,9 @@ class Song < ApplicationRecord
 
     ### Class methods ###
 
-    def self.map_all_songs(calculation, set_number = 0)
+    def self.map_all_songs(calculation, set_number_or_show_count = 0)
         song_list = all.map do |song|
-            value = set_number > 0 ? song.send(calculation, set_number) : song.send(calculation)
+            value = set_number_or_show_count > 0 ? song.send(calculation, set_number_or_show_count) : song.send(calculation)
             {
                 id: song.id,
                 title: song.title,

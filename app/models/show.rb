@@ -71,4 +71,11 @@ class Show < ApplicationRecord
         ShowSong.where(show_id: self.id).delete_all
         create_setlist(setlist)
     end
+
+    def self.active_show_count
+        sql = "SELECT show_id, Count(1) FROM songs
+                INNER JOIN show_songs ON songs.id = show_songs.song_id 
+                GROUP BY show_id"
+        ActiveRecord::Base.connection.execute(sql).values.count.to_f
+    end
 end

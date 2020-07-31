@@ -30,7 +30,8 @@ module Api::V1
         end
 
         def all_percentage_played
-            song_list = Song.map_all_songs(:percentage_played)
+            show_count = Show.active_show_count
+            song_list = Song.map_all_songs(:percentage_played, show_count)
             render json: song_list
         end
 
