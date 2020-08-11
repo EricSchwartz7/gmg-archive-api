@@ -27,8 +27,13 @@ Rails.application.routes.draw do
       get "show_appearances/:id", to: "songs#show_appearances"
 
       # Photos
-      resources :photos, only: [:create, :index, :show]
+      resources :photos, only: [:create, :index, :show, :destroy]
+      post "generate_signature/", to: "photos#generate_signature"
       get "photos_from_show/:id", to: "photos#photos_from_show"
+
+      # AudioRecs
+      resources :audio_recs, only: [:create, :index, :show, :destroy]
+      get "audio_recs_from_show/:id", to: "audio_recs#audio_recs_from_show"
 
 
     end
