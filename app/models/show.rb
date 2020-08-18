@@ -3,6 +3,7 @@ class Show < ApplicationRecord
     has_many :photos
     has_many :audio_recs
     has_many :show_songs
+    has_many :media_items
     has_many :songs, through: :show_songs
 
     def self.sql_year_string(year)

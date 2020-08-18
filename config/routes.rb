@@ -26,10 +26,10 @@ Rails.application.routes.draw do
       get "all_encore_appearances/", to: "songs#all_encore_appearances"
       get "show_appearances/:id", to: "songs#show_appearances"
 
-      # Photos
-      resources :photos, only: [:create, :index, :show, :destroy]
-      post "generate_signature/", to: "photos#generate_signature"
-      get "photos_from_show/:id", to: "photos#photos_from_show"
+      # MediaItems
+      resources :media_items, only: [:create, :index, :show, :destroy]
+      post "generate_signature/", to: "media_items#generate_signature"
+      get "media_items_from_show/:id", to: "media_items#media_items_from_show"
 
       # AudioRecs
       resources :audio_recs, only: [:create, :index, :show, :destroy]

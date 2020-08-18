@@ -2,19 +2,19 @@ require 'json'
 require 'open-uri'
 
 module Api::V1
-  class PhotosController < ApplicationController
-    def upload
-      photo = Photo.new
-      photo.filename = params[:file]
-      photo.save!
-      photo.filename.url
-    end
+  class MediaItemsController < ApplicationController
+    # def upload
+    #   photo = Photo.new
+    #   photo.filename = params[:file]
+    #   photo.save!
+    #   photo.filename.url
+    # end
 
     def create
       image = Cloudinary::Uploader.upload(params[:image])
       # video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
-      photo = Photo.create(image: image["url"])
-      render json: photo
+      media_item = MediaItem.create(image: image["url"])
+      render json: media_item
     end
 
     def generate_signature
@@ -42,18 +42,18 @@ module Api::V1
     end
     
     def index
-      photos = Cloudinary::Api.resources
-      render json: photos
+      media_items = Cloudinary::Api.resources
+      render json: media_items
     end
 
-    def photos_from_show
-      photos = Cloudinary::Api.resources_by_tag(params[:id])
-      render json: photos
+    def media_items_from_show
+      media_items = Cloudinary::Api.resources_by_tag(params[:id])
+      render json: media_items
     end
 
-    def show
-      url = JSON.parse open('https://res.cloudinary.com/gmg-archive-project/image/list/test.json').read
-    end
+    # def show
+    #   url = JSON.parse open('https://res.cloudinary.com/gmg-archive-project/image/list/test.json').read
+    # end
 
     def destroy
       public_id = "gmg/" + params[:id]
