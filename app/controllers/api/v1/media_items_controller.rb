@@ -11,9 +11,11 @@ module Api::V1
     # end
 
     def create
-      image = Cloudinary::Uploader.upload(params[:image])
-      # video = Cloudinary::Uploader.upload(params[:video], :resource_type => :video)
-      media_item = MediaItem.create(image: image["url"])
+      # params[:public_id]
+      # params[:show_id]
+      # params[:media_type]
+      # params[:title]
+      media_item = MediaItem.create!(media_item_params)
       render json: media_item
     end
 
@@ -67,6 +69,11 @@ module Api::V1
         result: response["result"],
         public_id: public_id
       }
+    end
+
+    private            
+    def media_item_params
+        params.require(:media_item).permit(:public_id, :show_id, :media_type, :title)
     end
   end
 end
