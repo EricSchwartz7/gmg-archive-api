@@ -3,12 +3,6 @@ require 'open-uri'
 
 module Api::V1
   class MediaItemsController < ApplicationController
-    # def upload
-    #   photo = Photo.new
-    #   photo.filename = params[:file]
-    #   photo.save!
-    #   photo.filename.url
-    # end
 
     def create
       # params[:public_id]
@@ -58,12 +52,10 @@ module Api::V1
       render json: audio_recs
     end
 
-    # def show
-    #   url = JSON.parse open('https://res.cloudinary.com/gmg-archive-project/image/list/test.json').read
-    # end
-
     def destroy
       public_id = "gmg/" + params[:id]
+      media_item = MediaItem.find_by(public_id: public_id)
+      media_item.destroy # if !media_item.nil?
       response = Cloudinary::Uploader.destroy(public_id, options = {})
       render json: {
         result: response["result"],
