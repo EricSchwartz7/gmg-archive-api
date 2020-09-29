@@ -48,8 +48,14 @@ module Api::V1
     end
 
     def audio_recs_from_show
-      audio_recs = Cloudinary::Api.resources_by_tag(params[:id], :resource_type => :video)
+      audio_recs = MediaItem.where(media_type: "audio");
       render json: audio_recs
+    end
+
+    def update
+      media_item = MediaItem.find(params[:id])
+      media_item.update(title: params[:title])
+      render json: "success"
     end
 
     def destroy

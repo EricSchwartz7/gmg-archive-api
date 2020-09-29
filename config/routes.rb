@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       get "show_appearances/:id", to: "songs#show_appearances"
 
       # MediaItems
-      resources :media_items, only: [:create, :index, :show, :destroy]
+      resources :media_items, only: [:create, :index, :show, :update, :destroy]
       post "generate_signature/", to: "media_items#generate_signature"
       get "photos_from_show/:id", to: "media_items#photos_from_show"
       get "audio_recs_from_show/:id", to: "media_items#audio_recs_from_show"
