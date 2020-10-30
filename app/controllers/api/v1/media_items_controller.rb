@@ -47,8 +47,15 @@ module Api::V1
       render json: photos
     end
 
+    def videos_from_show
+      videos_and_audio = Cloudinary::Api.resources_by_tag(params[:id], {resource_type: "video"})
+      # Audio files are considered to be resource type "video", but we can filter them out based on the "is_audio" property.
+      videos = videos_and_audio.select{|media_item| media_item["is_audio"] != true}
+      render json: videos
+    end
+
     def audio_recs_from_show
-      audio_recs = MediaItem.where(media_type: "audio");
+      audio_recs = MediaItem.where(show_id: params[:id]).where(media_type: "audio");
       render json: audio_recs
     end
 
@@ -61,7 +68,7 @@ module Api::V1
     def destroy
       public_id = "gmg/" + params[:id]
       media_item = MediaItem.find_by(public_id: public_id)
-      media_item.destroy # if !media_item.nil?
+      media_item.destroy unless media_item.nil?
       response = Cloudinary::Uploader.destroy(public_id, options = {})
       render json: {
         result: response["result"],
