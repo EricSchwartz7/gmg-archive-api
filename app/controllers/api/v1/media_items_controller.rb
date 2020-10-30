@@ -50,7 +50,7 @@ module Api::V1
     def videos_from_show
       videos_and_audio = Cloudinary::Api.resources_by_tag(params[:id], {resource_type: "video"})
       # Audio files are considered to be resource type "video", but we can filter them out based on the "is_audio" property.
-      videos = videos_and_audio.select{|media_item| media_item["is_audio"] != true}
+      videos = videos_and_audio["resources"].select{|media_item| media_item["is_audio"] != true}
       render json: videos
     end
 
