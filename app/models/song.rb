@@ -3,6 +3,10 @@ class Song < ApplicationRecord
     has_many :shows, through: :show_songs
     has_many :media_items, through: :media_item_songs
 
+    ### Constants ###
+
+
+
     ### Instance methods ###
 
     def times_played
@@ -34,6 +38,57 @@ class Song < ApplicationRecord
 
 
     ### Class methods ###
+
+    def self.calculate_stat(stat)
+        stat_methods = {
+            times_played: times_played,
+            percentage_played: percentage_played,
+            first_set_openers: set_openers(1),
+            second_set_openers: set_openers(2),
+            first_set_closers: set_closers(1),
+            second_set_closers: set_closers(2),
+            encore_appearances: encore_appearances
+        }
+        stat_methods[stat.to_sym]
+    end
+
+    def self.format_stat_array(stat_hash)
+        stat_hash.map do |key, value|
+            {
+                id: key[0],
+                title: key[1],
+                value: value
+            }
+        end
+    end
+
+    def self.set_openers(set_number)
+        songs_with_counts = Song.joins(:show_songs)
+            .where(show_songs: { set: set_number, position: 0 })
+            .group(:song_id, :title)
+            .order("count_all desc")
+            .count
+
+        format_stat_array(songs_with_counts)
+    end
+
+    def self.set_opening_songs(set_number)
+        ShowSong.where({set: set_number, position: 0})
+    end
+
+    # def self.all_set_openers(set_number)
+    #     show_songs = set_opening_songs(set_number)
+    #     song_list = all.map do |song|
+    #         {   
+    #             id: song.id,
+    #             title: song.title,
+    #             value: show_songs.select{ |show_song| show_song.song_id == song.id }.count
+    #         }
+    #     end
+    #     song_list
+    #         .select{ |song| song[:value] > 0 }
+    #         .sort_by{ |song| -song[:value] }
+    # end
 
     def self.map_all_songs(calculation, set_number_or_show_count = 0)
         song_list = all.map do |song|

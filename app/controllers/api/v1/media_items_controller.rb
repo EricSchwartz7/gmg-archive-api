@@ -69,7 +69,7 @@ module Api::V1
       public_id = "gmg/" + params[:id]
       media_item = MediaItem.find_by(public_id: public_id)
       media_item.destroy unless media_item.nil?
-      response = Cloudinary::Uploader.destroy(public_id, options = {})
+      response = Cloudinary::Uploader.destroy(public_id)
       render json: {
         result: response["result"],
         public_id: public_id

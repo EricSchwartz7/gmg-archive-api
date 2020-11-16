@@ -1,6 +1,12 @@
 module Api::V1
     class ShowsController < ApplicationController
 
+        def create
+            show = Show.create!(show_params)
+            show.create_setlist(params[:setlist])
+            render json: show
+        end
+
         def filtered_shows
             year = params[:year_filter]
             venue = params[:venue_filter]
@@ -34,12 +40,6 @@ module Api::V1
 
         def edit
             show = Show.find(params[:id])
-            render json: show
-        end
-        
-        def create
-            show = Show.create!(show_params)
-            show.create_setlist(params[:setlist])
             render json: show
         end
         

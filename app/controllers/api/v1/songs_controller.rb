@@ -15,7 +15,7 @@ module Api::V1
         # end
 
         def index
-            songs = Song.order(:title)
+            songs = params[:stat] ? Song.calculate_stat(params[:stat]) : Song.all
             render json: songs
         end
 
@@ -37,7 +37,7 @@ module Api::V1
 
         def all_set_openers
             set_number = params[:set_number].to_i
-            song_list = Song.map_all_songs(:set_opener_shows, set_number)
+            song_list = Song.set_openers(set_number)
             render json: song_list
         end
 
