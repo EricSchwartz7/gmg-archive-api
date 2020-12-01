@@ -1,6 +1,5 @@
 class Show < ApplicationRecord
     has_many :videos
-    has_many :photos
     has_many :audio_recs
     has_many :show_songs
     has_many :media_items
