@@ -16,3 +16,4 @@
 .byebug_history
 
 /config/cloudinary.yml
+/config/initializers/cloudinary.rb
