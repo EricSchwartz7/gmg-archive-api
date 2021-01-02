@@ -1,5 +1,6 @@
 module Api::V1
     class ShowsController < ApplicationController
+        before_action :authenticate_request, only: [:create, :edit, :update, :destroy]
 
         def create
             show = Show.create!(show_params)
@@ -78,6 +79,11 @@ module Api::V1
         private            
             def show_params
                 params.require(:show).permit(:date, :venue, :setlist, :songs)
+            end
+
+            def authenticate_request
+                @current_user = AuthorizeApiRequest.call(request.headers).result
+                render json: { error: 'Not Authorized' }, status: 401 unless @current_user
             end
     end
 end
