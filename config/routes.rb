@@ -28,11 +28,7 @@ Rails.application.routes.draw do
       get "videos_from_show/:id", to: "media_items#videos_from_show"
       get "audio_recs_from_show/:id", to: "media_items#audio_recs_from_show"
 
-      # AudioRecs
-      # resources :audio_recs, only: [:create, :index, :show, :destroy]
-      # get "audio_recs_from_show/:id", to: "audio_recs#audio_recs_from_show"
-
-
+      post 'authenticate', to: 'authentication#authenticate'
     end
   end
 end

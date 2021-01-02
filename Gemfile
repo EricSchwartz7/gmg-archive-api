@@ -44,3 +44,6 @@ gem 'rb-readline'
 
 gem 'cloudinary'
 gem 'carrierwave'
+gem 'bcrypt'
+gem 'jwt'
+gem 'simple_command'

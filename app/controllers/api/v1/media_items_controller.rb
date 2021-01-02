@@ -3,6 +3,7 @@ require 'open-uri'
 
 module Api::V1
   class MediaItemsController < ApplicationController
+    before_action :authenticate_request, except: [:index, :photos_from_show, :videos_from_show, :audio_recs_from_show]
 
     def create
       # params[:public_id]
@@ -79,6 +80,11 @@ module Api::V1
     private            
     def media_item_params
         params.require(:media_item).permit(:public_id, :show_id, :media_type, :title)
+    end
+
+    def authenticate_request
+      @current_user = AuthorizeApiRequest.call(request.headers).result
+      render json: { error: 'Not Authorized' }, status: 401 unless @current_user
     end
   end
 end
