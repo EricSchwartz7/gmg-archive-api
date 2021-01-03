@@ -78,8 +78,11 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# production:
+#   <<: *default
+#   database: gmg-archive-api_production
+#   username: gmg-archive-api
+#   password: <%= ENV['GMG-ARCHIVE-API_DATABASE_PASSWORD'] %>
+
 production:
-  <<: *default
-  database: gmg-archive-api_production
-  username: gmg-archive-api
-  password: <%= ENV['GMG-ARCHIVE-API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
