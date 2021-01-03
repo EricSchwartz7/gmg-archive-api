@@ -15,7 +15,7 @@ module Api::V1
         # end
 
         def index
-            songs = params[:stat] ? Song.calculate_stat(params[:stat]) : Song.all
+            songs = params[:stat] ? Song.calculate_stat(params[:stat]) : Song.all.order(:title)
             render json: songs
         end
 
