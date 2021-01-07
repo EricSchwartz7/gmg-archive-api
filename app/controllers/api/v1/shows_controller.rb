@@ -11,20 +11,11 @@ module Api::V1
         def filtered_shows
             year = params[:year_filter]
             venue = params[:venue_filter]
+            sort_order = params[:sort_order]
+            include_all = params[:include_all]
 
-            year_params = year.empty? ? nil : Show.sql_year_string(year)
-            venue_params = venue.empty? ? nil : {venue: venue}
-            order_params = {date: params[:sort_order] == "most_recent" ? :desc : :asc}
+            shows_with_setlists = Show.filtered_shows(year, venue, sort_order, include_all)
 
-            shows = Show.where(year_params).where(venue_params).order(order_params)
-            shows_with_setlists = shows.map do |show| 
-                {
-                    venue: show.venue,
-                    date: show.date,
-                    setlist: show.get_setlist,
-                    id: show.id
-                }
-            end
             render json: shows_with_setlists
         end
     

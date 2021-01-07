@@ -5,6 +5,27 @@ class Show < ApplicationRecord
     has_many :media_items
     has_many :songs, through: :show_songs
 
+    def self.filtered_shows(year, venue, sort_order, include_all)
+        year_params = year.empty? ? nil : Show.sql_year_string(year)
+        venue_params = venue.empty? ? nil : {venue: venue}
+        order_params = {date: sort_order == "most_recent" ? :desc : :asc}
+
+        if (include_all)
+            shows = Show.where(year_params).where(venue_params).order(order_params)
+        else
+            shows = Show.joins(:media_items).where(year_params).where(venue_params).group(:id).order(order_params)
+        end
+
+        shows.map do |show| 
+            {
+                venue: show.venue,
+                date: show.date,
+                setlist: show.get_setlist,
+                id: show.id
+            }
+        end
+    end
+
     def self.sql_year_string(year)
         "date >= '#{year}-01-01' AND date <= '#{year}-12-31'"
     end
