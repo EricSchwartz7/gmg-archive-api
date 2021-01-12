@@ -1,6 +1,6 @@
 module Api::V1
     class ShowsController < ApplicationController
-        before_action :authenticate_request, only: [:create, :edit, :update, :destroy]
+        before_action :authenticate_request, only: [:create, :edit, :update, :destroy, :get_videos]
 
         def create
             show = Show.create!(show_params)
@@ -8,11 +8,11 @@ module Api::V1
             render json: show
         end
 
-        def filtered_shows
+        def index
             year = params[:year_filter]
             venue = params[:venue_filter]
             sort_order = params[:sort_order]
-            include_all = params[:include_all]
+            include_all = ActiveModel::Type::Boolean.new.cast(params[:include_all]) # Convert string to boolean
 
             shows_with_setlists = Show.filtered_shows(year, venue, sort_order, include_all)
 

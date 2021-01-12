@@ -13,9 +13,17 @@ class Show < ApplicationRecord
         if (include_all)
             shows = Show.where(year_params).where(venue_params).order(order_params)
         else
-            shows = Show.joins(:media_items).where(year_params).where(venue_params).group(:id).order(order_params)
+            # sql = "(SELECT shows.* FROM shows
+            #     JOIN videos ON shows.id = videos.show_id)
+            #     UNION
+            #     (SELECT shows.* FROM shows
+            #     JOIN media_items ON shows.id = media_items.show_id)"
+            # shows = ActiveRecord::Base.connection.execute(sql).values
+            shows_with_media_items = Show.joins(:media_items).where(year_params).where(venue_params).group(:id)
+            shows_with_youtubes = Show.joins(:videos).where(year_params).where(venue_params).group(:id)
+            shows = (shows_with_media_items | shows_with_youtubes).sort_by(&:date)
+            shows.reverse! if order_params[:date] == :desc
         end
-
         shows.map do |show| 
             {
                 venue: show.venue,
