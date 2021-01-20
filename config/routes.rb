@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get "audio_recs_from_show/:id", to: "media_items#audio_recs_from_show"
 
       post 'authenticate', to: 'authentication#authenticate'
+      get 'check_token_expired', to: 'authentication#check_token_expired'
     end
   end
 end

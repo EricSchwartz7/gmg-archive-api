@@ -11,5 +11,9 @@ module Api::V1
                 render json: { error: command.errors }, status: :unauthorized
             end
         end
+
+        def check_token_expired
+            authenticate_request
+        end
     end
 end
