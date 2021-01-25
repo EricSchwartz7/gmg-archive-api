@@ -62,11 +62,6 @@ module Api::V1
             render json: venues
         end
 
-        def get_videos
-            videos = Show.find(params[:id]).videos
-            render json: videos
-        end
-
         private            
             def show_params
                 params.require(:show).permit(:date, :venue, :setlist, :songs)
