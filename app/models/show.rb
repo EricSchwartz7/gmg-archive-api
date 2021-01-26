@@ -19,7 +19,7 @@ class Show < ApplicationRecord
             #     (SELECT shows.* FROM shows
             #     JOIN media_items ON shows.id = media_items.show_id)"
             # shows = ActiveRecord::Base.connection.execute(sql).values
-            shows_with_media_items = Show.joins(:media_items).where(year_params).where(venue_params).group(:id)
+            shows_with_media_items = Show.joins(:media_items).where.not('media_items.media_type = ?', "audio").where(year_params).where(venue_params).group(:id)
             shows_with_youtubes = Show.joins(:videos).where(year_params).where(venue_params).group(:id)
             shows = (shows_with_media_items | shows_with_youtubes).sort_by(&:date)
             shows.reverse! if order_params[:date] == :desc
