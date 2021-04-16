@@ -1,24 +1,5 @@
-# README
+Concert Archive Back End
+---
+Search through shows, and view or upload photos and videos from each date. View song statistics including set openers, closers, encores, and percentage played.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+ReactJS front end with a Rails back end. Data is stored in a PostgreSQL relational database. Integrated Cloudinary for media storage and transformations. Styling with Semantic-UI React.
