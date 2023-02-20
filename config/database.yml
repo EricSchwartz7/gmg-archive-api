@@ -81,7 +81,8 @@ test:
 production:
   <<: *default
   database: gmg-archive-api_production
-  username: gmg-archive-api
+  host: localhost
+  username: eschwartz
   password: <%= ENV['GMG-ARCHIVE-API_DATABASE_PASSWORD'] %>
 
 # production:
